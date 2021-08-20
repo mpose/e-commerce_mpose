@@ -1,6 +1,19 @@
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
+document.addEventListener("DOMContentLoaded", function () { //espera a que cargue el contenido
+    document.getElementById("submitb").addEventListener("click", function () {
+        let inputEmail = document.getElementById("inputEmail");
+        let inputPassword = document.getElementById("inputPassword");
+        let camposCompletos = true; //funcion bandera (flag)
 
+        if (inputEmail.value === '') {
+                camposCompletos = false;
+        }
+        if (inputPassword.value === '') {
+                camposCompletos = false;
+        }
+        if (camposCompletos) {
+            window.location = 'inicio.html';
+        } else {
+            alert("Debes ingresar usuario y contraseña")
+        }
+    })
 });
