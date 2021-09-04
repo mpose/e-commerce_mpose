@@ -44,4 +44,26 @@ var getJSONData = function(url){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+  let ulog = localStorage.getItem('ulog');
+  let infousuario = document.getElementById("info-usuario")
+  
+/*
+  if (ulog) {
+    ulog = JSON.parse(ulog);
+    usuario.innerText = usuario.innerText + ulog.email;
+    infousuario.style = "display: inline-block";
+  }
+*/
+if (ulog) {
+  ulog = JSON.parse(ulog);
+  document.getElementById("usuario").innerHTML = ulog;
+  infousuario.style = "display: inline-block";
+  }
+
+  if (document.getElementById("salir")) {
+    document.getElementById("salir").addEventListener("click", function () {
+      localStorage.removeItem('ulog');
+      window.location = 'index.html';
+    })
+}
 });

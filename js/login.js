@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function () { //espera a que cargu
                 camposCompletos = false;
         }
         if (camposCompletos) {
-            window.location = 'inicio.html';
+                localStorage.setItem('ulog', JSON.stringify(inputEmail.value));
+                window.location = 'inicio.html';
         } else {
             alert("Debes ingresar usuario y contraseña")
         }
