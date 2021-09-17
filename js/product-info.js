@@ -1,6 +1,126 @@
+var category = {};
+
+function showImagesGallery(array){
+
+    let htmlContentToAppend = "";
+
+    for(let i = 0; i < array.length; i++){
+        let imageSrc = array[i];
+
+        htmlContentToAppend += `
+        <div class="col-lg-3 col-md-4 col-6">
+            <div class="d-block mb-4 h-100">
+                <img class="img-fluid img-thumbnail" src="` + imageSrc + `" alt="">
+            </div>
+        </div>
+        `
+
+        document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
+    }
+}
+
+var listaComentarios = [];
+
+function mostrarListaComentarios(listado){
+
+    let htmlContentToAppend = "";
+    for(let i = 0; i < listado.length; i++){
+        let comentario = listado[i];
+
+        htmlContentToAppend += `
+        <div class="list-group-item list-group-item-action>
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex w-100 justify-content-between">
+                    <div class="mb-1">
+                        <h4 class="mb-1"> Puntuacion: `+ comentario.score +`/5 <span class="fa fa-star checked"></span></h4>
+                        <p> Comentario: ` + comentario.description + `</p>
+                        <p> Usuario: ` + comentario.user + `</p>
+                        <p> Fecha: ` + comentario.dateTime + `</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        `
+
+        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend;
+    }
+}
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+    getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            product = resultObj.data;
+
+            let categoryNameHTML  = document.getElementById("categoryName");
+            let categoryDescriptionHTML = document.getElementById("categoryDescription");
+            let productCountHTML = document.getElementById("productCount");
+            let productCategoryHTML = document.getElementById("productCategory");
+        
+            categoryNameHTML.innerHTML = product.name;
+            categoryDescriptionHTML.innerHTML = product.description;
+            productCountHTML.innerHTML = product.soldCount;
+            productCategoryHTML.innerHTML = product.category;
+
+            //Muestro las imagenes en forma de galería
+            showImagesGallery(product.images);
+        }
+    });
+});
+document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            listaComentarios = resultObj.data;
+            //Muestro las categorías ordenadas
+            mostrarListaComentarios(listaComentarios);
+        }
+    });
 
 });
+document.addEventListener("DOMContentLoaded", function(e){
+    let ulog = localStorage.getItem('ulog');
+    let infousuario = document.getElementById("info-usuarioComent")
+    
+    if (ulog) {
+        ulog = JSON.parse(ulog);
+        document.getElementById("usuarioComent").innerHTML = ulog;
+        infousuario.style = "display: inline-block";
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () { //espera a que cargue el contenido
+        document.getElementById("submitComent").addEventListener("click", function () {
+            let puntuacionUlog = document.getElementById("puntuacionUlog");
+            let comentarioUlog = document.getElementById("comentarioUlog");
+            let camposCompletos = true; //funcion bandera (flag)
+    
+            if (puntuacionUlog.value === "value1") {
+                    camposCompletos = false;
+            }
+            if (comentarioUlog.value === '') {
+                    camposCompletos = false;
+            }
+            if (camposCompletos) {
+                    localStorage.setItem('puntuacionUsurio', JSON.stringify(puntuacionUlog.value));
+                    localStorage.setItem('comentarioUsuario', JSON.stringify(comentarioUlog.value));
+            } else {
+                alert("Para comentar debes completar los campos solicitados")
+            }
+        })
+    });
+
+/* DESAFIO:
+    document.addEventListener("DOMContentLoaded", function(e){
+        let ulog = localStorage.getItem('ulog');
+        let puntuacionUsurio = localStorage.getItem('puntuacionUsurio');
+        let comentarioUsuario = localStorage.getItem('comentarioUsuario');
+
+        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend;
+    });
+    */

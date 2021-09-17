@@ -6,6 +6,10 @@ const PRODUCT_INFO_URL = "https://japdevdep.github.io/ecommerce-api/product/5678
 const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json";
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
+const PRODUCT_INFO_CELERIO = "https://mpose.github.io/prueba_e-commerce/json/json_product_info_celerio.jso";
+const PRODUCT_INFO_CHEVROLET = "https://mpose.github.io/prueba_e-commerce/json/json_product_info_chevrolet.json";
+const PRODUCT_INFO_FIAT = "https://mpose.github.io/prueba_e-commerce/json/json_product_info_fiat.json";
+const PRODUCT_INFO_PEUGEOT = "https://mpose.github.io/prueba_e-commerce/json/json_product_info_peugeot.json";
 
 var showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -47,13 +51,7 @@ document.addEventListener("DOMContentLoaded", function(e){
   let ulog = localStorage.getItem('ulog');
   let infousuario = document.getElementById("info-usuario")
   
-/*
-  if (ulog) {
-    ulog = JSON.parse(ulog);
-    usuario.innerText = usuario.innerText + ulog.email;
-    infousuario.style = "display: inline-block";
-  }
-*/
+
 if (ulog) {
   ulog = JSON.parse(ulog);
   document.getElementById("usuario").innerHTML = ulog;
@@ -63,6 +61,8 @@ if (ulog) {
   if (document.getElementById("salir")) {
     document.getElementById("salir").addEventListener("click", function () {
       localStorage.removeItem('ulog');
+      localStorage.removeItem('puntuacionUsurio');
+      localStorage.removeItem('comentarioUsuario');
       window.location = 'index.html';
     })
 }

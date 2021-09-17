@@ -13,6 +13,12 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .checked {
+      color: orange;
+    }
+    </style>
 </head>
 
 <body>
@@ -29,14 +35,57 @@
       </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <main role="main">
+    <div class="container mt-5">
+      <div class="text-center p-4">
+        <h2>Descripción del producto</h2>
+      </div>
+      <h3 id="categoryName"></h3>
+      <hr class="my-3">
+      <dl>
+        <dt>Descripción</dt>
+        <dd>
+          <p id="categoryDescription"></p>
+        </dd>
+
+        <dt>Cantidad de productos vendidos</dt>
+        <dd>
+          <p id="productCount"></p>
+        </dd>
+
+        <dt>Categoria a la que corresponde este producto</dt>
+        <dd>
+          <p id="productCategory"></p>
+        </dd>
+
+        <dt>Imágenes ilustrativas</dt>
+        <dd>
+          <div class="row text-center text-lg-left pt-2" id="productImagesGallery">
+          </div>
+        </dd>
+
+        <dt>Comentarios</dt>
+        <dd id="mostrarComentarios"></dd>
+      </dl>
+      <div class=list-group-item list-group-item-action id="info-usuarioComent" style="display: none;">
+      <h4>Calificar</h4>
+      <form>
+          <a id="usuarioComent" class="py-2 d-none d-md-inline-block"></a>, agradecemos que puedas dar tu opinion sobre el producto</p>
+          <p>Puntuacion: <select id="puntuacionUlog">
+            <option value="value1">--Puntua el articulo--</option>
+            <option value="value2">1 Estrella</option>
+            <option value="value3">2 Estrellas</option>
+            <option value="value4">3 Estrellas</option>
+            <option value="value5">4 Estrellas</option>
+            <option value="value5">5 Estrellas</option>
+          </select></p>
+        <p>Comentario: <textarea type="text" name="Comentario" style="width: 65rem; height: 10rem;" id="comentarioUlog"></textarea></p>
+        <button type="submit" id="submitComent">Enviar</button>
+      </form>
     </div>
-  </div>
+      <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
+    </div>
+  </main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">
