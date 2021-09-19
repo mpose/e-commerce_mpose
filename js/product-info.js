@@ -19,6 +19,7 @@ function showImagesGallery(array){
     }
 }
 
+
 var listaComentarios = [];
 
 function mostrarListaComentarios(listado){
@@ -33,7 +34,7 @@ function mostrarListaComentarios(listado){
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
                     <div class="mb-1">
-                        <h4 class="mb-1"> Puntuacion: `+ comentario.score +`/5 <span class="fa fa-star checked"></span></h4>
+                        <h4 class="mb-1"> Puntuacion: `+ estrellas(comentario.score) +`</h4>
                         <p> Comentario: ` + comentario.description + `</p>
                         <p> Usuario: ` + comentario.user + `</p>
                         <p> Fecha: ` + comentario.dateTime + `</p>
@@ -46,6 +47,20 @@ function mostrarListaComentarios(listado){
 
         document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend;
     }
+}
+
+function estrellas (score) {
+    let total = 5;
+    let result = "";
+    for (let i = 0; i < total; i++) {
+        if (score > 0){
+            result += '<span class="fa fa-star checked"></span>';
+            score --;
+        }else{
+            result += '<span class="fa fa-star"></span>';
+        }
+    }
+    return result;
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
@@ -106,9 +121,10 @@ document.addEventListener("DOMContentLoaded", function(e){
             if (comentarioUlog.value === '') {
                     camposCompletos = false;
             }
-            if (camposCompletos) {
+            if (camposCompletos) { //DESAFIO
                     localStorage.setItem('puntuacionUsurio', JSON.stringify(puntuacionUlog.value));
                     localStorage.setItem('comentarioUsuario', JSON.stringify(comentarioUlog.value));
+                    window.location = 'product-info.html'
             } else {
                 alert("Para comentar debes completar los campos solicitados")
             }
