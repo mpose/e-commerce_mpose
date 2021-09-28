@@ -47,7 +47,7 @@ function mostrarListaComentarios(listado) {
         </div>
         `
 
-        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend + agregarComentario (puntuacionUlog, comentarioUlog);
+        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend; //+ agregarComentario (puntuacionUlog, comentarioUlog);
     }
 }
 
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () { //espera a que cargu
     })
 });
 
-function agregarComentario (){
+/* function agregarComentario (){
         let ulog = localStorage.getItem('ulog');
         let puntuacionUsuario = localStorage.getItem('puntuacionUsuario').puntuacionUlog.value;
         let comentarioUsuario = localStorage.getItem('comentarioUsuario').comentarioUlog.value;
@@ -185,5 +185,5 @@ function agregarComentario (){
         </div>
         `
         document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppendComentario;
-    };
+    }; */
     
