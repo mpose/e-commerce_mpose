@@ -63,7 +63,7 @@ function estrellas(score) {
     return result;
 }
 
-var currentListadoProductos = [];
+var currentListadoProductos = []; //Sacar hasta linea 98
 var listadoRelacion = [];
 
 function mostrarProductoRelacionado(currentListadoProductos, listadoRelacion) {
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function (e) {
+document.addEventListener("DOMContentLoaded", function (e) { //Sacar
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             currentListadoProductos = resultObj.data;
