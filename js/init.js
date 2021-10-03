@@ -6,7 +6,7 @@ const PRODUCT_INFO_URL = "https://japdevdep.github.io/ecommerce-api/product/5678
 const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json";
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
-const PRODUCT_INFO_CELERIO = "https://mpose.github.io/prueba_e-commerce/json/json_product_info_celerio.json";
+const PRODUCT_INFO_CELERIO = "https://mpose.github.io/prueba_e-commerce/json/json_product_info_celerio.jso";
 const PRODUCT_INFO_CHEVROLET = "https://mpose.github.io/prueba_e-commerce/json/json_product_info_chevrolet.json";
 const PRODUCT_INFO_FIAT = "https://mpose.github.io/prueba_e-commerce/json/json_product_info_fiat.json";
 const PRODUCT_INFO_PEUGEOT = "https://mpose.github.io/prueba_e-commerce/json/json_product_info_peugeot.json";
@@ -63,7 +63,6 @@ if (ulog) {
       localStorage.removeItem('ulog');
       localStorage.removeItem('puntuacionUsurio');
       localStorage.removeItem('comentarioUsuario');
-      localStorage.removeItem('producto');
       window.location = 'index.html';
     })
 }

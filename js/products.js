@@ -41,11 +41,6 @@ function sortProductos(criteria, array){
     return result;
 }
 
-function verProducto(name){
-    localStorage.setItem("producto",JSON.stringify({productName: name}));
-    window.location =  'product-info.html'
-}
-
 function mostrarListadoProductos(){
 
     let htmlContentToAppend = "";
@@ -56,7 +51,7 @@ function mostrarListadoProductos(){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
 
             htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action">
+            <a href="product-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
@@ -68,10 +63,9 @@ function mostrarListadoProductos(){
                         </div>
                         <p class="mb-1">` + product.description + `</p>
                         <p class="mb-1">` + product.currency + product.cost + `</p>
-                        <button style="float: right;" class="btn btn-info" onclick=" verProducto('` + product.name + `')">Más Información</button>
                     </div>
                 </div>
-            </div>
+            </a>
             `
         }
 

@@ -1,5 +1,3 @@
-var productosArray;
-
 var category = {};
 
 function showImagesGallery(array) {
@@ -47,7 +45,7 @@ function mostrarListaComentarios(listado) {
         </div>
         `
 
-        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend; //+ agregarComentario (puntuacionUlog, comentarioUlog);
+        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend;
     }
 }
 
@@ -65,62 +63,63 @@ function estrellas(score) {
     return result;
 }
 
-function urlJson() {
-    let name = JSON.parse(localStorage.getItem("producto")).productName;
-    let url;
+var currentListadoProductos = [];
+var listadoRelacion = [];
 
-    switch (name) {
-        case "Suzuki Celerio":
-            url = PRODUCT_INFO_CELERIO;
-            break;
+function mostrarProductoRelacionado(currentListadoProductos, listadoRelacion) {
 
-        case "Chevrolet Onix Joy":
-            url = PRODUCT_INFO_CHEVROLET;
-            break;
+    let htmlContentToAppend = "";
+    for (let i = 0; i < listadoRelacion.length; i++) {
+        let name = currentListadoProductos[listadoRelacion[i]].name;
+        let imagen = currentListadoProductos[listadoRelacion[i]].imgSrc;
+        let moneda = currentListadoProductos[listadoRelacion[i]].currency;
+        let precio = currentListadoProductos[listadoRelacion[i]].cost;
+        let descripcion = currentListadoProductos[listadoRelacion[i]].description;
 
-        case "Fiat Way":
-            url = PRODUCT_INFO_FIAT;
-            break;
-
-        case "Peugeot 208":
-            url = PRODUCT_INFO_PEUGEOT;
-            break;
-        default: "";
-
-
+        htmlContentToAppend += `
+            <div class="list-group-item list-group-item-action">
+                <div class="row">
+                    <div class="col-3">
+                    <img src="` + imagen + `" alt="` + descripcion + `" class="img-thumbnail">
+                    </div>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">`+ name +`</h4>
+                        </div>
+                        <p class="mb-1">` + descripcion + `</p>
+                        <p class="mb-1">` + moneda + precio + `</p>
+                        <a class="btn btn-info" href="product-info.html">Más Información</a>
+                    </div>
+                </div>
+            </div>
+            `
+        document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;
     }
-    return url;
 }
-
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(urlJson()).then(function (resultObj) {
-
-        let categoryNameHTML = document.getElementById("categoryName");
-        let categoryDescriptionHTML = document.getElementById("categoryDescription");
-        let productCountHTML = document.getElementById("productCount");
-        let productCategoryHTML = document.getElementById("productCategory");
-
+    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
-            product = resultObj.data.forEach(product => {
-                if (product.name == JSON.parse(localStorage.getItem('producto')).productName) {
-                    categoryNameHTML.innerHTML = product.name;
-                    categoryDescriptionHTML.innerHTML = product.description;
-                    productCountHTML.innerHTML = product.soldCount;
-                    productCategoryHTML.innerHTML = product.category;
+            product = resultObj.data;
 
+            let categoryNameHTML = document.getElementById("categoryName");
+            let categoryDescriptionHTML = document.getElementById("categoryDescription");
+            let productCountHTML = document.getElementById("productCount");
+            let productCategoryHTML = document.getElementById("productCategory");
 
-                    //Muestro las imagenes en forma de galería
-                    showImagesGallery(product.images);
-                }
-            });
+            categoryNameHTML.innerHTML = product.name;
+            categoryDescriptionHTML.innerHTML = product.description;
+            productCountHTML.innerHTML = product.soldCount;
+            productCategoryHTML.innerHTML = product.category;
+
+            //Muestro las imagenes en forma de galería
+            showImagesGallery(product.images);
         }
-    })
+    });
 });
-
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -129,8 +128,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
             mostrarListaComentarios(listaComentarios);
         }
     });
+});
+
+document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            currentListadoProductos = resultObj.data;
+            //Muestro las categorías ordenadas
+            mostrarProductoRelacionado(currentListadoProductos, product.relatedProducts);
+        }
+    });
 
 });
+
 document.addEventListener("DOMContentLoaded", function (e) {
     let ulog = localStorage.getItem('ulog');
     let infousuario = document.getElementById("info-usuarioComent")
@@ -155,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () { //espera a que cargu
             camposCompletos = false;
         }
         if (camposCompletos) { //DESAFIO
-            localStorage.setItem('puntuacionUsuario', JSON.stringify(puntuacionUlog.value));
+            localStorage.setItem('puntuacionUsurio', JSON.stringify(puntuacionUlog.value));
             localStorage.setItem('comentarioUsuario', JSON.stringify(comentarioUlog.value));
             window.location = 'product-info.html'
         } else {
@@ -164,26 +174,12 @@ document.addEventListener("DOMContentLoaded", function () { //espera a que cargu
     })
 });
 
-/* function agregarComentario (){
+/* DESAFIO:
+    document.addEventListener("DOMContentLoaded", function(e){
         let ulog = localStorage.getItem('ulog');
-        let puntuacionUsuario = localStorage.getItem('puntuacionUsuario').puntuacionUlog.value;
-        let comentarioUsuario = localStorage.getItem('comentarioUsuario').comentarioUlog.value;
-        let htmlContentToAppendComentario = "";
+        let puntuacionUsurio = localStorage.getItem('puntuacionUsurio');
+        let comentarioUsuario = localStorage.getItem('comentarioUsuario');
 
-        htmlContentToAppendComentario += `
-        <div class="list-group-item list-group-item-action>
-            <div class="row">
-                <div class="col">
-                    <div class="d-flex w-100 justify-content-between">
-                    <div class="mb-1">
-                        <p> Comentario: "` + comentarioUsuario + `"</p>
-                        <p> Usuario: "` + ulog + `"</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-        `
-        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppendComentario;
-    }; */
-    
+        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend;
+    });
+    */
