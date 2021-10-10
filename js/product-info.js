@@ -45,7 +45,7 @@ function mostrarListaComentarios(listado) {
         </div>
         `
 
-        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend;
+        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend; //+ agregarComentario (puntuacionUlog, comentarioUlog);
     }
 }
 
@@ -63,82 +63,107 @@ function estrellas(score) {
     return result;
 }
 
-var currentListadoProductos = []; //Sacar hasta linea 98
-var listadoRelacion = [];
+function verProducto(name) {
+    localStorage.setItem("producto", JSON.stringify({ productName: name }));
+    window.location = 'product-info.html'
+}
 
-function mostrarProductoRelacionado(currentListadoProductos, listadoRelacion) {
+function urlJson() {
+    let name = JSON.parse(localStorage.getItem("producto")).productName;
+    let url;
 
-    let htmlContentToAppend = "";
-    for (let i = 0; i < listadoRelacion.length; i++) {
-        let name = currentListadoProductos[listadoRelacion[i]].name;
-        let imagen = currentListadoProductos[listadoRelacion[i]].imgSrc;
-        let moneda = currentListadoProductos[listadoRelacion[i]].currency;
-        let precio = currentListadoProductos[listadoRelacion[i]].cost;
-        let descripcion = currentListadoProductos[listadoRelacion[i]].description;
+    switch (name) {
+        case "Suzuki Celerio":
+            url = PRODUCT_INFO_CELERIO;
+            break;
 
+        case "Chevrolet Onix Joy":
+            url = PRODUCT_INFO_CHEVROLET;
+            break;
+
+        case "Fiat Way":
+            url = PRODUCT_INFO_FIAT;
+            break;
+
+        case "Peugeot 208":
+            url = PRODUCT_INFO_PEUGEOT;
+            break;
+        default: "";
+
+
+    }
+    return url;
+}
+
+var listadoProductos = [];
+
+function showRelatedBooks(arrayListado, arrayRelacionados) {
+    let htmlContentToAppend = '';
+    arrayRelacionados.forEach(function (indice) {
         htmlContentToAppend += `
             <div class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
-                    <img src="` + imagen + `" alt="` + descripcion + `" class="img-thumbnail">
+                        <img src="` + arrayListado[indice].imgSrc + `" alt="` + arrayListado[indice].description + `" class="img-thumbnail">
                     </div>
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ name +`</h4>
+                            <h4 class="mb-1">` + arrayListado[indice].name + `</h4>
                         </div>
-                        <p class="mb-1">` + descripcion + `</p>
-                        <p class="mb-1">` + moneda + precio + `</p>
-                        <a class="btn btn-info" href="product-info.html">Más Información</a>
+                        <p class="mb-1">` + arrayListado[indice].description + `</p>
+                        <p class="mb-1">` + arrayListado[indice].currency + arrayListado[indice].cost + `</p>
+                        <button class="btn btn-info" onclick=" verProducto('` + arrayListado[indice].name + `')">Más Información</button>
                     </div>
                 </div>
             </div>
             `
-        document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;
-    }
+    });
+
+    document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;
+
 }
+
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
+    getJSONData(urlJson()).then(function (resultObj) {
+
+        let categoryNameHTML = document.getElementById("categoryName");
+        let categoryDescriptionHTML = document.getElementById("categoryDescription");
+        let productCountHTML = document.getElementById("productCount");
+        let productCategoryHTML = document.getElementById("productCategory");
+
         if (resultObj.status === "ok") {
-            product = resultObj.data;
+            product = resultObj.data.forEach(product => {
+                if (product.name == JSON.parse(localStorage.getItem('producto')).productName) {
+                    categoryNameHTML.innerHTML = product.name;
+                    categoryDescriptionHTML.innerHTML = product.description;
+                    productCountHTML.innerHTML = product.soldCount;
+                    productCategoryHTML.innerHTML = product.category;
 
-            let categoryNameHTML = document.getElementById("categoryName");
-            let categoryDescriptionHTML = document.getElementById("categoryDescription");
-            let productCountHTML = document.getElementById("productCount");
-            let productCategoryHTML = document.getElementById("productCategory");
 
-            categoryNameHTML.innerHTML = product.name;
-            categoryDescriptionHTML.innerHTML = product.description;
-            productCountHTML.innerHTML = product.soldCount;
-            productCategoryHTML.innerHTML = product.category;
-
-            //Muestro las imagenes en forma de galería
-            showImagesGallery(product.images);
+                    //Muestro las imagenes en forma de galería
+                    showImagesGallery(product.images);
+                }
+                getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
+                    if (resultObj.status === "ok") {
+                        listaComentarios = resultObj.data;
+                        //Muestro las categorías ordenadas
+                        mostrarListaComentarios(listaComentarios);
+                    }
+                    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+                        if (resultObj.status === "ok") {
+                            listadoProductos = resultObj.data;
+        
+                            showRelatedBooks(listadoProductos, product.relatedProducts);
+                        }
+                    });
+                });
+            })
         }
-    });
-});
-document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            listaComentarios = resultObj.data;
-            //Muestro las categorías ordenadas
-            mostrarListaComentarios(listaComentarios);
-        }
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function (e) { //Sacar
-    getJSONData(PRODUCTS_URL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            currentListadoProductos = resultObj.data;
-            //Muestro las categorías ordenadas
-            mostrarProductoRelacionado(currentListadoProductos, product.relatedProducts);
-        }
-    });
-
+    })
 });
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -165,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () { //espera a que cargu
             camposCompletos = false;
         }
         if (camposCompletos) { //DESAFIO
-            localStorage.setItem('puntuacionUsurio', JSON.stringify(puntuacionUlog.value));
+            localStorage.setItem('puntuacionUsuario', JSON.stringify(puntuacionUlog.value));
             localStorage.setItem('comentarioUsuario', JSON.stringify(comentarioUlog.value));
             window.location = 'product-info.html'
         } else {
@@ -174,12 +199,25 @@ document.addEventListener("DOMContentLoaded", function () { //espera a que cargu
     })
 });
 
-/* DESAFIO:
-    document.addEventListener("DOMContentLoaded", function(e){
+/* function agregarComentario (){
         let ulog = localStorage.getItem('ulog');
-        let puntuacionUsurio = localStorage.getItem('puntuacionUsurio');
-        let comentarioUsuario = localStorage.getItem('comentarioUsuario');
+        let puntuacionUsuario = localStorage.getItem('puntuacionUsuario').puntuacionUlog.value;
+        let comentarioUsuario = localStorage.getItem('comentarioUsuario').comentarioUlog.value;
+        let htmlContentToAppendComentario = "";
 
-        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppend;
-    });
-    */
+        htmlContentToAppendComentario += `
+        <div class="list-group-item list-group-item-action>
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex w-100 justify-content-between">
+                    <div class="mb-1">
+                        <p> Comentario: "` + comentarioUsuario + `"</p>
+                        <p> Usuario: "` + ulog + `"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        `
+        document.getElementById("mostrarComentarios").innerHTML = htmlContentToAppendComentario;
+    }; */
