@@ -24,14 +24,14 @@ function mostrarCarrito(listado){
                 <div class="col-3">
                     <img src="` + product.src + `" alt="" class="img-thumbnail">
                 </div>
-                <div class="col">
+                <div class="col" class="col-md-8 order-md-1">
                     <div class="d-flex w-100 justify-content-between">
                     <div class="mb-1">
                         <h4 class="mb-1">Producto: `+ product.name +`</h4>
                         <p>Cantidad seleccionada: ` + product.count + ` unidades</p>
                         <p>Precio por unidad: ` + product.currency + product.unitCost + `</p>
                     </div>
-                    <p>Subtotal: ` + product.currency + (Math.round(product.unitCost * product.count)) + `</p>
+                    <p><strong>Subtotal: ` + product.currency + (Math.round(product.unitCost * product.count)) + `</strong></p>
                 </div>
             </div>
         </div>

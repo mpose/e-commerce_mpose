@@ -15,22 +15,30 @@
     <link href="css/styles.css" rel="stylesheet">
   </head>
   <body>
-    <nav class="site-header sticky-top py-1 bg-primary">
-      <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
-        <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-        <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-        <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-        <div id="info-usuario" style="display: none;">
-          <div class="dropdown">
-            <button id="usuario" style="background-color: blue;" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="my-profile.html">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
-              <a class="dropdown-item" href="cart.html">Mi carrito</a>
-              <div class="dropdown-divider"></div>
-              <a id="salir" class="dropdown-item" href="#">Salir</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+            <a class="nav-link" href="inicio.html">Inicio</a>
+            <a class="nav-link" href="categories.html">Categorías</a>
+            <a class="nav-link" href="products.html">Productos</a>
+            <a class="nav-link" href="sell.html">Vender</a>
+          <div id="info-usuario" style="display: none;">
+            <div class="dropdown">
+              <button id="usuario" style="background-color: #343A40; color: #007bff; border: none;" class="btn btn-primary dropdown-toggle" type="button"
+                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                href="my-profile.html">
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+                <a class="dropdown-item" href="cart.html">Mi carrito</a>
+                <div class="dropdown-divider"></div>
+                <a id="salir" class="dropdown-item" href="#">Salir</a>
+              </div>
             </div>
           </div>
         </div>

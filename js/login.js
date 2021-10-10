@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function () { //espera a que cargue el contenido
     document.getElementById("submitb").addEventListener("click", function () {
         let inputEmail = document.getElementById("inputEmail");
