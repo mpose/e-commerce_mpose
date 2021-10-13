@@ -29,7 +29,7 @@ function mostrarListaComentarios(listado) {
         let comentario = listado[i];
 
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action>
+        <div class="list-group-item">
             <div class="row">
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
@@ -97,7 +97,7 @@ function urlJson() {
 
 var listadoProductos = [];
 
-function showRelatedBooks(arrayListado, arrayRelacionados) {
+function mostrarRelatedProducts(arrayListado, arrayRelacionados) {
     let htmlContentToAppend = '';
     arrayRelacionados.forEach(function (indice) {
         htmlContentToAppend += `
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         if (resultObj.status === "ok") {
                             listadoProductos = resultObj.data;
         
-                            showRelatedBooks(listadoProductos, product.relatedProducts);
+                            mostrarRelatedProducts(listadoProductos, product.relatedProducts);
                         }
                     });
                 });

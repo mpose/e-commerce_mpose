@@ -10,16 +10,20 @@ let PERCENTAGE_SYMBOL = '%';
 let SUCCESS_MSG = "¡Se ha realizado la compra con éxito! :)";
 let ERROR_MSG = "Ha habido un error :(, verifica qué pasó.";
 
+function cambiarCantidad(value) {
+    localStorage.setItem("cantidad", JSON.stringify({ productCount: value }));
+}
+
 var listaProductosCarrito = [];
 
-function mostrarCarrito(listado){
+function mostrarCarrito(listado) {
 
     let htmlContentToAppend = "";
-    for(let i = 0; i < listado.length; i++){
+    for (let i = 0; i < listado.length; i++) {
         let product = listado[i];
 
         htmlContentToAppend += `
-        <div class="list-group-item">
+        <div>
             <div class="row">
                 <div class="col-3">
                     <img src="` + product.src + `" alt="" class="img-thumbnail">
@@ -27,11 +31,8 @@ function mostrarCarrito(listado){
                 <div class="col" class="col-md-8 order-md-1">
                     <div class="d-flex w-100 justify-content-between">
                     <div class="mb-1">
-                        <h4 class="mb-1">Producto: `+ product.name +`</h4>
-                        <p>Cantidad seleccionada: ` + product.count + ` unidades</p>
+                        <h4 class="mb-1">Producto: `+ product.name + `</h4>
                         <p>Precio por unidad: ` + product.currency + product.unitCost + `</p>
-                    </div>
-                    <p><strong>Subtotal: ` + product.currency + (Math.round(product.unitCost * product.count)) + `</strong></p>
                 </div>
             </div>
         </div>
@@ -41,50 +42,53 @@ function mostrarCarrito(listado){
     }
 }
 
+
 //Función que se utiliza para actualizar los costos de publicación
-function updateTotalCosts(listado){
-    for(let i = 0; i < listado.length; i++){
+function updateTotalCosts(listado) {
+    for (let i = 0; i < listado.length; i++) {
         let costoUnitario = listado[i].unitCost;
         let moneda = listado[i].currency;
-        let cantidadS = listado[i].count;
 
-    let unitProductCostHTML = document.getElementById("productCostText");
-    let comissionCostHTML = document.getElementById("comissionText");
-    let totalCostHTML = document.getElementById("totalCostText");
+        let unitProductCostHTML = document.getElementById("productCostText");
+        let comissionCostHTML = document.getElementById("comissionText");
+        let totalCostHTML = document.getElementById("totalCostText");
 
-    let unitCostToShow = moneda + (Math.round(costoUnitario * cantidadS));
-    let comissionToShow = moneda + (Math.round((costoUnitario * cantidadS) * comissionPercentage));
-    let totalCostToShow = moneda + (Math.round(((costoUnitario * cantidadS) * comissionPercentage) + (costoUnitario * cantidadS)));
+        let unitCostToShow = moneda + (Math.round(costoUnitario * productCount));
+        let comissionToShow = moneda + (Math.round((costoUnitario * productCount) * comissionPercentage));
+        let totalCostToShow = moneda + (Math.round(((costoUnitario * productCount) * comissionPercentage) + (costoUnitario * productCount)));
 
-    unitProductCostHTML.innerHTML = unitCostToShow;
-    comissionCostHTML.innerHTML = comissionToShow;
-    totalCostHTML.innerHTML = totalCostToShow;
-}
+        unitProductCostHTML.innerHTML = unitCostToShow;
+        comissionCostHTML.innerHTML = comissionToShow;
+        totalCostHTML.innerHTML = totalCostToShow;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(CART_INFO_URL).then(function(resultObj){
-        if (resultObj.status === "ok")
-        {
+    getJSONData(CART_INFO_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
             listaProductosCarrito = resultObj.data;
             //Muestro las categorías ordenadas
             mostrarCarrito(listaProductosCarrito.articles);
             updateTotalCosts(listaProductosCarrito.articles); //Agrego la funcion para que por defecto traiga el costo con envio Premium
         }
     });
-    
-    document.getElementById("goldradio").addEventListener("change", function(){
+
+    document.getElementById("goldradio").addEventListener("change", function () {
         comissionPercentage = 0.15;
         updateTotalCosts(listaProductosCarrito.articles);
     });
-    
-    document.getElementById("premiumradio").addEventListener("change", function(){
+
+    document.getElementById("premiumradio").addEventListener("change", function () {
         comissionPercentage = 0.07;
         updateTotalCosts(listaProductosCarrito.articles);
     });
 
-    document.getElementById("standardradio").addEventListener("change", function(){
+    document.getElementById("standardradio").addEventListener("change", function () {
         comissionPercentage = 0.05;
+        updateTotalCosts(listaProductosCarrito.articles);
+    });
+    document.getElementById("cantidadComprar").addEventListener("change", function () {
+        productCount = this.value;
         updateTotalCosts(listaProductosCarrito.articles);
     });
 
