@@ -24,15 +24,15 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <div class="container d-flex flex-column flex-md-row justify-content-between">
-          <a class="nav-link" href="inicio.html">Inicio</a>
-          <a class="nav-link" href="categories.html">Categorías</a>
-          <a class="nav-link" href="products.html">Productos</a>
-          <a class="nav-link" href="sell.html">Vender</a>
+        <a class="nav-link" href="inicio.html">Inicio</a>
+        <a class="nav-link" href="categories.html">Categorías</a>
+        <a class="nav-link" href="products.html">Productos</a>
+        <a class="nav-link" href="sell.html">Vender</a>
         <div id="info-usuario" style="display: none;">
           <div class="dropdown">
-            <button id="usuario" style="background-color: #343A40; color: #007bff; border: none;" class="btn btn-primary dropdown-toggle" type="button"
-              id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-              href="my-profile.html">
+            <button id="usuario" style="background-color: #343A40; color: #007bff; border: none;"
+              class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" href="my-profile.html">
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
@@ -45,52 +45,60 @@
       </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <h2>Listado de Productos</h2>
-    <div class="container">
-      <div class="row">
-        <div class="col text-right">
-          <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
-            <label class="btn btn-light active" id="sortAsc">
-              <input type="radio" name="options" autocomplete="off" checked>Menor Precio
-            </label>
-            <label class="btn btn-light" id="sortDesc">
-              <input type="radio" name="options" autocomplete="off">Mayor Precio
-            </label>
-            <label class="btn btn-light" id="sortByCount">
-              <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Mas
-              Vendido
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-end">
-        <div class="col-md-6"></div>
-        <div class="col-md-6 col-sm-12 mb-1 container">
-          <div class="row container p-0 m-0">
-            <div class="col">
-              <p class="font-weight-normal text-right my-2">Precio:</p>
-            </div>
-            <div class="col">
-              <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
-            </div>
-            <div class="col">
-              <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
-            </div>
-            <div class="col-3 p-0">
-              <div class="btn-group" role="group">
-                <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
-                <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+  <div>
+    <div class="container p-5">
+      <h2>Listado de Productos</h2>
+      <div class="container">
+          <div class="row">
+              <div class="col text-right">
+                  <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+                      <label class="btn btn-light active" id="sortAsc">
+                          <input type="radio" name="options" autocomplete="off" checked>Menor Precio
+                      </label>
+                      <label class="btn btn-light" id="sortDesc">
+                          <input type="radio" name="options" autocomplete="off">Mayor Precio
+                      </label>
+                      <label class="btn btn-light" id="sortByCount">
+                          <input type="radio" name="options" autocomplete="off"><i
+                              class="fas fa-sort-amount-down mr-1"></i>Mas
+                          Vendido
+                      </label>
+                  </div>
               </div>
-            </div>
           </div>
-        </div>
+          <div class="row justify-content-end">
+              <div class="col-md-6"></div>
+              <div class="col-md-6 col-sm-12 mb-1 container">
+                  <div class="row container p-0 m-0">
+                      <div class="col">
+                          <p class="font-weight-normal text-right my-2">Precio:</p>
+                      </div>
+                      <div class="col">
+                          <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
+                      </div>
+                      <div class="col">
+                          <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
+                      </div>
+                      <div class="col-3 p-0">
+                          <div class="btn-group" role="group">
+                              <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
+                              <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-      <div class="row">
-        <div class="list-group" id="lista-de-productos"></div>
+  </div>
+  </div>
+  <main role="main">
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row" id="lista-de-productos">
+        </div>
       </div>
     </div>
-  </div>
+  </main>
   <footer class="text-muted bg-light">
     <div class="container">
       <p class="float-right">

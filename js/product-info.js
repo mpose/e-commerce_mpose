@@ -88,6 +88,10 @@ function urlJson() {
         case "Peugeot 208":
             url = PRODUCT_INFO_PEUGEOT;
             break;
+
+        case "Nissan Kicks":
+            url = PRODUCT_INFO_NISSAN;
+            break;
         default: "";
 
 

@@ -64,12 +64,63 @@
     </div>
   </nav>
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    <form class="needs-validation" novalidate>
+      <div class="form-row">
+        <div class="col-md-3 mb-3">
+          <label for="validationCustom01">Nombre</label>
+          <input type="text" class="form-control" id="inputNombre" placeholder="Nombre" value="" required>
+          <div class="valid-feedback">
+            Ok!.
+          </div>
+          <div class="invalid-feedback">
+            Debes ingresar tu nombre.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="validationCustom02">Apellido</label>
+          <input type="text" class="form-control" id="inputApellido" placeholder="Apellido" value="" required>
+          <div class="valid-feedback">
+            Ok!.
+          </div>
+          <div class="invalid-feedback">
+            Debes ingresar tu apellido.
+          </div>
+        </div>
+      <div class="col-md-2 mb-3">
+        <label for="validationCustom04">Edad</label>
+        <input type="number" class="form-control" id="inputEdad" placeholder="Edad" value="" required>
+        <div class="valid-feedback">
+          Ok!.
+        </div>
+        <div class="invalid-feedback">
+          Debes ingresar tu edad.
+        </div>
+      </div>
     </div>
+      <div class="form-row">
+        <div class="col-md-5 mb-3">
+          <label for="validationCustom03">Email</label>
+          <input type="email" class="form-control" id="inputEmail" placeholder="email@ejemplo.com" required>
+          <div class="valid-feedback">
+            Ok!.
+          </div>
+          <div class="invalid-feedback">
+            Ingresa tu nuevo email si deseas actualizarlo.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="validationCustom05">Telefono de Contacto</label>
+          <input type="number" class="form-control" id="inputTelefono" placeholder="Telefono/Celular" required>
+          <div class="valid-feedback">
+            Ok!.
+          </div>
+          <div class="invalid-feedback">
+            Debes ingresar un numero de telefono.
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit" onclick="guardarDatos()">Actualizar datos</button>
+    </form>
   </div>
   <footer class="text-muted bg-light">
     <div class="container">
@@ -91,6 +142,26 @@
       <div></div>
     </div>
   </div>
+  <script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>
