@@ -81,12 +81,12 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-5 col-lg-3">
-                  <label for="localidadEnvio">Ciudad</label>
-                  <input type="text" class="form-control" id="localidadEnvio">
+                  <label for="ciudadEnvio">Ciudad</label>
+                  <input type="text" class="form-control" id="ciudadEnvio">
                 </div>
                 <div class="form-group col-md-3 col-lg-2">
-                  <label for="ciudadEnvio">País</label>
-                  <input type="text" class="form-control" id="ciudadEnvio">
+                  <label for="paisEnvio">País</label>
+                  <input type="text" class="form-control" id="paisEnvio">
                 </div>
                 <div class="form-group col-md-3 col-lg-3">
                   <label for="codigoPostal">Código Postal</label>
@@ -142,9 +142,18 @@
           <strong id="totalCostText">-</strong>
         </li>
       </ul>
+      <div class="col">
+        <h5 class="mb-1">Forma de Pago</h5>
+        <div class="d-block my-3">
+          <div>
+            <small id="checkFormaPago">No hay forma de pago asociada</small>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formasdepago">Agregar forma de Pago</button>
+          </div>
+        </div>
+      </div>
     </div><br>
 
-  <button class="btn btn-success" type="submit">Comprar</button>
+  <button class="btn btn-success" type="submit" id="comprar" onclick="eventoSubmit (event)">Comprar</button>
   </div><br>
   <footer class="text-muted bg-light">
     <div class="container">
@@ -198,6 +207,48 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="formasdepago">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Elige como pagar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="custom-control custom-radio">
+              <input id="tarjetaCredito" name="formapago" type="radio" class="custom-control-input" checked>
+              <label class="custom-control-label" for="tarjetaCredito">Tarjeta de Credito</label>
+              <div>
+                <input type="text" id="titularTarjeta" placeholder="Titular de la tarjeta" style="display: inline-block;" required>
+                <input type="number" id="numeroTarjeta" placeholder="Numero de Tarjeta" style="display: inline-block;" min="0" required>
+                <input type="number" id="vencimientoTarjeta" placeholder="F.Vencimiento" style="display: inline-block" min="0" required>
+                <input type="number" id="cvvTarjeta" placeholder="CVV" style="display: inline-block" min="0" required>
+              </div>
+            </div>
+            <hr>
+            <div class="custom-control custom-radio">
+              <input id="transBancaria" name="formapago" type="radio" class="custom-control-input">
+              <label class="custom-control-label" for="transBancaria">Transferencia Bancaria</label>
+              <div>
+                <input type="text" id="titularCuenta" placeholder="Titular de la cuenta" style="display: none;" required>
+                <input type="text" id="banco" placeholder="Banco"style="display: none;" required>
+                <input type="number" id="cuenta" placeholder="Cuenta" style="display: none;" min="0" required>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" aria-label="Close" data-dismiss="modal" id="formaPagoChecked">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
