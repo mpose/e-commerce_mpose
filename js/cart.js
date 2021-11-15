@@ -3,10 +3,10 @@ let comissionPercentage = 0.15;
 let PESO_SYMBOL = "UYU ";
 var listaProductosCarrito = [];
 let cargaTarjetaOk = "Tienes una tarjeta de Credito agregada";
-let cargaTransBancariaOk = "Tienes una transferencia bancaria agregada"; 
+let cargaTransBancariaOk = "Tienes una transferencia bancaria agregada";
 let cargaDatosPago = "No hay forma de pago asociada";
 
-function calculoSubtotal (unitCost) {
+function calculoSubtotal(unitCost) {
     let cantidad = parseInt(document.getElementById("cantidadComprar").value);
 
     subTotalX = PESO_SYMBOL + Math.round(unitCost * cantidad);
@@ -39,7 +39,7 @@ function mostrarCarrito(listado) {
                         <p>Precio por unidad: ` + product.currency + product.unitCost + `</p>
                         <div class="col-md-3 mb-3">
                             <label>¿Cantidad?</label>
-                                <input type="number" class="form-control" onchange="calculoSubtotal(`+ product.unitCost +`)" id="cantidadComprar" value="`+ product.count +`" min="0">
+                                <input type="number" class="form-control" onchange="calculoSubtotal(`+ product.unitCost + `)" id="cantidadComprar" value="` + product.count + `" min="0">
                                     <div class="invalid-feedback">
                                         La cantidad es requerida.
                                     </div>
@@ -55,7 +55,7 @@ function mostrarCarrito(listado) {
     }
 }
 
-function updateTotalCosts(){
+function updateTotalCosts() {
     let comissionCostHTML = document.getElementById("comissionText");
     let totalCostHTML = document.getElementById("totalCostText");
 
@@ -103,9 +103,9 @@ function miValidacion() {
 }
 
 //validacion forma de pago
-function checkkformaPago () {
+function checkkformaPago() {
     let camposCompletos = true;
-    
+
     let infoDatosPago = document.getElementById("checkFormaPago");
 
     let tarjetaCredito = document.getElementById("tarjetaCredito");
@@ -121,7 +121,7 @@ function checkkformaPago () {
     let cuentaTransferencia = document.getElementById("cuenta");
 
     if (tarjetaCredito.checked) {
-        if (titularTarjeta.value === ''){
+        if (titularTarjeta.value === '') {
             camposCompletos = false;
         }
         if (numeroTarjeta.value === '') {
@@ -131,11 +131,11 @@ function checkkformaPago () {
             camposCompletos = false;
         }
         if (cvvTarjeta.value === '') {
-            camposCompletos = false;  
+            camposCompletos = false;
         }
         if (camposCompletos) {
             infoDatosPago.innerHTML = cargaTarjetaOk;
-        }else {
+        } else {
             infoDatosPago.innerHTML = cargaDatosPago;
         }
     }
@@ -148,21 +148,21 @@ function checkkformaPago () {
             camposCompletos = false;
         }
         if (cuentaTransferencia.value === '') {
-            camposCompletos = false; 
+            camposCompletos = false;
         }
         if (camposCompletos) {
             infoDatosPago.innerHTML = cargaTransBancariaOk;
-        }else {
+        } else {
             infoDatosPago.innerHTML = cargaDatosPago;
         }
     }
 }
 
-function eventoSubmit (event) {
-    if (!miValidacion()) {            
+function eventoSubmit(event) {
+    if (!miValidacion()) {
         event.preventDefault();
         event.stopPropagation();
-        }
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -174,24 +174,26 @@ document.addEventListener("DOMContentLoaded", function (e) {
             updateTotalCosts(); //Agrego la funcion para que por defecto traiga el costo con envio Premium
         }
     });
+    
     document.getElementById("formaPagoChecked").addEventListener("click", function () {
-        checkkformaPago ();
+        checkkformaPago();
     });
 
-    document.getElementById("goldradio").addEventListener("change", function(){
+    document.getElementById("goldradio").addEventListener("change", function () {
         comissionPercentage = 0.15;
         updateTotalCosts();
     });
-    
-    document.getElementById("premiumradio").addEventListener("change", function(){
+
+    document.getElementById("premiumradio").addEventListener("change", function () {
         comissionPercentage = 0.07;
         updateTotalCosts();
     });
 
-    document.getElementById("standardradio").addEventListener("change", function(){
+    document.getElementById("standardradio").addEventListener("change", function () {
         comissionPercentage = 0.05;
         updateTotalCosts();
     });
+
     document.getElementById("tarjetaCredito").addEventListener("change", function () {
         let titularTarjeta = document.getElementById("titularTarjeta");
         let numeroTarjeta = document.getElementById("numeroTarjeta");
@@ -206,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         numeroTarjeta.style = "display: inline-block";
         vencimientoTarjeta.style = "display: inline-block";
         cvvTarjeta.style = "display: inline-block";
-        
+
         titularTransferencia.style = "display: none";
         bancoTransferencia.style = "display: none";
         cuentaTransferencia.style = "display: none";
@@ -239,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         titularTransferencia.style = "display: inline-block";
         bancoTransferencia.style = "display: inline-block";
-        cuentaTransferencia.style = "display: inline-block"; 
+        cuentaTransferencia.style = "display: inline-block";
     })
 
 });

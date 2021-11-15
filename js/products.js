@@ -5,6 +5,7 @@ var currentListadoProductos = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
 var maxCount = undefined;
+var buscar = undefined;
 
 function sortProductos(criteria, array){
     let result = [];
@@ -54,22 +55,25 @@ function mostrarListadoProductos(){
 
         if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
+            
+                if (buscar == undefined || product.name.toLowerCase().indexOf(buscar) != -1) {
 
-            htmlContentToAppend += `
-            <div class="col-md-4 col-sm-6 col-lg-3">
-                <div class="card mb-4 shadow-sm custom-card">
-                  <img class="bd-placeholder-img card-img-top" src="` + product.imgSrc + `">
-                  <h3 class="m-3">`+ product.name +`</h3>
-                  <div class="card-body">
-                    <p class="card-text">` + product.description + `</p>
-                    <p class="mb-1">` + product.currency + product.cost + `</p>
-                    <p class="card-text"><small class="text-muted">` + product.soldCount + ` Ventas</small></p>
-                    <button style="float: right;" class="btn btn-info" onclick=" verProducto('` + product.name + `')">Más Información</button>
-                  </div>
-                </div>
-            </div>
-            `
-        }
+                    htmlContentToAppend += `
+                    <div class="col-md-4 col-sm-6 col-lg-3">
+                        <div class="card mb-4 shadow-sm custom-card">
+                        <img class="bd-placeholder-img card-img-top" src="` + product.imgSrc + `">
+                        <h3 class="m-3">`+ product.name +`</h3>
+                        <div class="card-body">
+                            <p class="card-text">` + product.description + `</p>
+                            <p class="mb-1">` + product.currency + product.cost + `</p>
+                            <p class="card-text"><small class="text-muted">` + product.soldCount + ` Ventas</small></p>
+                            <button style="float: right;" class="btn btn-info btn-sm" onclick=" verProducto('` + product.name + `')">Más Información</button>
+                        </div>
+                        </div>
+                    </div>
+                    `
+                }
+            }
 
         document.getElementById("lista-de-productos").innerHTML = htmlContentToAppend;
     }
@@ -112,9 +116,11 @@ document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
+        document.getElementById("buscador").value = "";
 
         minCount = undefined;
         maxCount = undefined;
+        buscar = undefined;
 
         mostrarListadoProductos();
     });
@@ -140,5 +146,12 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
 
         mostrarListadoProductos();
+    });
+    document.getElementById("buscador").addEventListener('input', function () {
+
+        buscar = document.getElementById("buscador").value.toLowerCase();
+
+        mostrarListadoProductos();
+
     });
 });

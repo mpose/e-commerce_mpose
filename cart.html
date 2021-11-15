@@ -142,12 +142,14 @@
           <strong id="totalCostText">-</strong>
         </li>
       </ul>
-      <div class="col">
-        <h5 class="mb-1">Forma de Pago</h5>
-        <div class="d-block my-3">
-          <div>
-            <small id="checkFormaPago">No hay forma de pago asociada</small>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formasdepago">Agregar forma de Pago</button>
+      <div class="list-group-item">
+        <div class="col">
+          <h5 class="mb-1">Forma de Pago</h5>
+          <div class="d-block my-3">
+            <div>
+              <small id="checkFormaPago">No hay forma de pago asociada</small>
+              <button type="button" class="btn btn-primary btn-sm"" data-toggle="modal" data-target="#formasdepago">Agregar forma de Pago</button>
+            </div>
           </div>
         </div>
       </div>
@@ -223,10 +225,10 @@
               <input id="tarjetaCredito" name="formapago" type="radio" class="custom-control-input" checked>
               <label class="custom-control-label" for="tarjetaCredito">Tarjeta de Credito</label>
               <div>
-                <input type="text" id="titularTarjeta" placeholder="Titular de la tarjeta" style="display: inline-block;" required>
-                <input type="number" id="numeroTarjeta" placeholder="Numero de Tarjeta" style="display: inline-block;" min="0" required>
-                <input type="number" id="vencimientoTarjeta" placeholder="F.Vencimiento" style="display: inline-block" min="0" required>
-                <input type="number" id="cvvTarjeta" placeholder="CVV" style="display: inline-block" min="0" required>
+                <input type="text" class="form-control" id="titularTarjeta" placeholder="Titular de la tarjeta" style="display: inline-block;" required>
+                <input type="number" class="form-control" id="numeroTarjeta" placeholder="Numero de Tarjeta" style="display: inline-block;" min="0" required>
+                <input type="number" class="form-control" id="vencimientoTarjeta" placeholder="F.Vencimiento" style="display: inline-block" min="0" required>
+                <input type="number" class="form-control" id="cvvTarjeta" placeholder="CVV" style="display: inline-block" min="0" required>
               </div>
             </div>
             <hr>
@@ -234,16 +236,16 @@
               <input id="transBancaria" name="formapago" type="radio" class="custom-control-input">
               <label class="custom-control-label" for="transBancaria">Transferencia Bancaria</label>
               <div>
-                <input type="text" id="titularCuenta" placeholder="Titular de la cuenta" style="display: none;" required>
-                <input type="text" id="banco" placeholder="Banco"style="display: none;" required>
-                <input type="number" id="cuenta" placeholder="Cuenta" style="display: none;" min="0" required>
+                <input type="text" class="form-control" id="titularCuenta" placeholder="Titular de la cuenta" style="display: none;" required>
+                <input type="text" class="form-control" id="banco" placeholder="Banco"style="display: none;" required>
+                <input type="number" class="form-control" id="cuenta" placeholder="Cuenta" style="display: none;" min="0" required>
               </div>
             </div>
             <hr>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" aria-label="Close" data-dismiss="modal" id="formaPagoChecked">Guardar cambios</button>
+          <button type="submit" class="btn btn-primary btn-sm"" aria-label="Close" data-dismiss="modal" id="formaPagoChecked">Guardar cambios</button>
         </div>
       </div>
     </div>
