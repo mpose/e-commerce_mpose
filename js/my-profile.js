@@ -1,4 +1,32 @@
 
+function previewFile() {
+    let preview = document.getElementById('foto');
+    let file = document.getElementById("inputFile").files[0];
+  
+    let reader = new FileReader();//instancia de objeto.
+    //C O N S T R U C T O R 
+  
+    reader.onload = function () {
+      preview.src = reader.result;
+  
+    }
+  
+    if (file) {
+      reader.readAsDataURL(file);
+  
+    } else {
+      preview.src = "img/avatar.png";
+    }
+  }
+
+  function guardar() {
+    let preview = document.getElementById('foto');
+  
+    localStorage.setItem('laImagen', JSON.stringify(preview.src));
+    alert("Imagen guardada")
+  }
+
+
 function mostrarDatos(){
     let nombre = JSON.parse(localStorage.getItem("nombre"));
     let apellido = JSON.parse(localStorage.getItem("apellido"));
@@ -59,5 +87,14 @@ function guardarDatos() {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
+    let preview = document.getElementById('foto');
+  let laImagen = JSON.parse(localStorage.getItem('laImagen'));
+  
+    if (laImagen != null) {
+        preview.src = laImagen;
+    
+      } else {
+        preview.src = "img/avatar.png";
+      }
     mostrarDatos();
 });
