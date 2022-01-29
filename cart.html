@@ -237,7 +237,19 @@
               <label class="custom-control-label" for="transBancaria">Transferencia Bancaria</label>
               <div>
                 <input type="text" class="form-control" id="titularCuenta" placeholder="Titular de la cuenta" style="display: none;" required>
-                <input type="text" class="form-control" id="banco" placeholder="Banco"style="display: none;" required>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01" style="display: none;">Banco</label>
+                  </div>
+                  <select class="custom-select" id="banco" style="display: none;">
+                    <option value="0" selected>Seleccione un Banco</option>
+                    <option value="1">Itau</option>
+                    <option value="2">Brou</option>
+                    <option value="3">Santander</option>
+                    <option value="4">Scotiabank</option>
+                    <option value="5">HSBC</option>
+                  </select>
+                </div>
                 <input type="number" class="form-control" id="cuenta" placeholder="Cuenta" style="display: none;" min="0" required>
               </div>
             </div>

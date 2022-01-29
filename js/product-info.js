@@ -134,21 +134,18 @@ function mostrarRelatedProducts(arrayListado, arrayRelacionados) {
     let htmlContentToAppend = '';
     arrayRelacionados.forEach(function (indice) {
         htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + arrayListado[indice].imgSrc + `" alt="` + arrayListado[indice].description + `" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">` + arrayListado[indice].name + `</h4>
-                        </div>
-                        <p class="mb-1">` + arrayListado[indice].description + `</p>
-                        <p class="mb-1">` + arrayListado[indice].currency + arrayListado[indice].cost + `</p>
-                        <button class="btn btn-info" onclick=" verProducto('` + arrayListado[indice].name + `')">Más Información</button>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-4 col-sm-6 col-lg-3">
+        <div class="card mb-4 shadow-sm custom-card">
+        <img class="bd-placeholder-img card-img-top" src="` + arrayListado[indice].imgSrc + `" alt="` + arrayListado[indice].description + `">
+        <h3 class="m-3">` + arrayListado[indice].name + `</h3>
+        <div class="card-body">
+            <p class="card-text">` + arrayListado[indice].description + `</p>
+            <p class="mb-1">` + arrayListado[indice].currency + arrayListado[indice].cost + `</p>
+            <p class="card-text"><small class="text-muted">` + arrayListado[indice].soldCount + ` Ventas</small></p>
+            <button style="float: right;" class="btn btn-info btn-sm" onclick=" verProducto('` + arrayListado[indice].name + `')">Más Información</button>
+        </div>
+        </div>
+    </div>
             `
     });
 

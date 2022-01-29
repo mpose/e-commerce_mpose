@@ -144,7 +144,7 @@ function checkkformaPago() {
         if (titularTransferencia.value === '') {
             camposCompletos = false;
         }
-        if (bancoTransferencia.value === '') {
+        if (bancoTransferencia.value === '0') {
             camposCompletos = false;
         }
         if (cuentaTransferencia.value === '') {
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         cuentaTransferencia.style = "display: none";
 
         titularTransferencia.value = "";
-        bancoTransferencia.value = "";
+        bancoTransferencia.value = "0";
         cuentaTransferencia.value = "";
 
     });

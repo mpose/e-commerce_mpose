@@ -63,10 +63,12 @@
       </div>
     </div>
   </nav>
-  <div class="container mt-3">
+  <div class="container">
+    <div class="col-md-4 col-sm-6 col-lg-3">
     <input class="form-control" type="file" id="inputFile" onchange="previewFile()" placeholder="">
     <img id="foto" src="" height="200" alt="Foto de Perfil">
     <button class="btn btn-primary" id="guardar" onclick="guardar()">Guardar</button>
+  </div>
   </div>
   <div class="container p-5">
     <form class="needs-validation" novalidate>
@@ -114,7 +116,7 @@
           </div>
         </div>
         <div class="col-md-3 mb-3">
-          <label for="validationCustom05">Telefono de Contacto</label>
+          <label for="validationCustom05">Telefono</label>
           <input type="number" class="form-control" id="inputTelefono" placeholder="Telefono/Celular" required>
           <div class="valid-feedback">
             Ok!.

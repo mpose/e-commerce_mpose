@@ -52,10 +52,10 @@ document.addEventListener("DOMContentLoaded", function(e){
   let infousuario = document.getElementById("info-usuario")
   
 
-if (ulog) {
-  ulog = JSON.parse(ulog);
-  document.getElementById("usuario").innerHTML = ulog;
-  infousuario.style = "display: inline-block";
+  if (ulog) {
+    ulog = JSON.parse(ulog);
+    document.getElementById("usuario").innerHTML = ulog;
+    infousuario.style = "display: inline-block";
   }
 
   if (document.getElementById("salir")) {
@@ -71,5 +71,5 @@ if (ulog) {
       localStorage.removeItem('telefono');
       window.location = 'index.html';
     })
-}
+  }
 });

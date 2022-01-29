@@ -7,10 +7,10 @@ var minCount = undefined;
 var maxCount = undefined;
 var buscar = undefined;
 
-function sortProductos(criteria, array){
+function sortProductos(criteria, array) {
     let result = [];
-    if (criteria === ORDER_ASC_BY_COST)
-    {
+    if (criteria === ORDER_ASC_BY_COST) {
+
         result = array.sort(function(a, b) {
             let aCost = parseInt(a.cost);
             let bCost = parseInt(b.cost);
