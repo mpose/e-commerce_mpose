@@ -225,10 +225,10 @@
               <input id="tarjetaCredito" name="formapago" type="radio" class="custom-control-input" checked>
               <label class="custom-control-label" for="tarjetaCredito">Tarjeta de Credito</label>
               <div>
-                <input type="text" class="form-control" id="titularTarjeta" placeholder="Titular de la tarjeta" style="display: inline-block;" required>
-                <input type="number" class="form-control" id="numeroTarjeta" placeholder="Numero de Tarjeta" style="display: inline-block;" min="0" required>
-                <input type="number" class="form-control" id="vencimientoTarjeta" placeholder="F.Vencimiento" style="display: inline-block" min="0" required>
-                <input type="number" class="form-control" id="cvvTarjeta" placeholder="CVV" style="display: inline-block" min="0" required>
+                <input type="text" class="form-control mb-1" id="titularTarjeta" placeholder="Titular de la tarjeta" style="display: inline-block;" required>
+                <input type="number" class="form-control mb-1" id="numeroTarjeta" placeholder="Numero de Tarjeta" style="display: inline-block;" min="0" required>
+                <input type="number" class="form-control mb-1" id="vencimientoTarjeta" placeholder="F.Vencimiento" style="display: inline-block" min="0" required>
+                <input type="number" class="form-control mb-1" id="cvvTarjeta" placeholder="CVV" style="display: inline-block" min="0" required>
               </div>
             </div>
             <hr>
@@ -236,12 +236,12 @@
               <input id="transBancaria" name="formapago" type="radio" class="custom-control-input">
               <label class="custom-control-label" for="transBancaria">Transferencia Bancaria</label>
               <div>
-                <input type="text" class="form-control" id="titularCuenta" placeholder="Titular de la cuenta" style="display: none;" required>
-                <div class="input-group mb-3">
+                <input type="text" class="form-control mb-1" id="titularCuenta" placeholder="Titular de la cuenta" style="display: none;" required>
+                <div class="input-group mb-1">
                   <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01" style="display: none;">Banco</label>
+                    <label class="input-group-text mb-1" for="inputGroupSelect01" style="display: none;">Banco</label>
                   </div>
-                  <select class="custom-select" id="banco" style="display: none;">
+                  <select class="custom-select mb-1" id="banco" style="display: none;">
                     <option value="0" selected>Seleccione un Banco</option>
                     <option value="1">Itau</option>
                     <option value="2">Brou</option>
@@ -250,14 +250,14 @@
                     <option value="5">HSBC</option>
                   </select>
                 </div>
-                <input type="number" class="form-control" id="cuenta" placeholder="Cuenta" style="display: none;" min="0" required>
+                <input type="number" class="form-control mb-1" id="cuenta" placeholder="Cuenta" style="display: none;" min="0" required>
               </div>
             </div>
             <hr>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-sm"" aria-label="Close" data-dismiss="modal" id="formaPagoChecked">Guardar cambios</button>
+          <button type="submit" class="btn btn-primary btn-sm" aria-label="Close" data-dismiss="modal" id="formaPagoChecked">Guardar cambios</button>
         </div>
       </div>
     </div>
