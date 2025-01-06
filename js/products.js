@@ -62,9 +62,9 @@ function mostrarListadoProductos(){
                     <div class="col-md-4 col-sm-6 col-lg-3">
                         <div class="card mb-4 shadow-sm custom-card">
                         <img class="bd-placeholder-img card-img-top" src="` + product.imgSrc + `">
-                        <h3 class="m-3">`+ product.name +`</h3>
+                        <h3 class="m-3">`+ (product.name.length > 15 ? product.name.substring(0, 15) + '...' : product.name.padEnd(20, ' ')) + `</h3>
                         <div class="card-body">
-                            <p class="card-text">` + product.description + `</p>
+                            <p class="card-text">` + (product.description.length > 50 ? product.description.substring(0, 50) + '...' : product.description) + `</p>
                             <p class="mb-1">` + product.currency + product.cost + `</p>
                             <p class="card-text"><small class="text-muted">` + product.soldCount + ` Ventas</small></p>
                             <button style="float: right;" class="btn btn-info btn-sm" onclick=" verProducto('` + product.name + `')">Más Información</button>

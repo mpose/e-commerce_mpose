@@ -23,6 +23,14 @@ function showImagesGallery(array) {
 
 var listaComentarios = [];
 
+function formatFecha(fecha) {
+    const date = new Date(fecha);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
 function mostrarListaComentarios(listado) {
 
     let htmlContentToAppend = "";
@@ -38,7 +46,7 @@ function mostrarListaComentarios(listado) {
                         <h4 class="mb-1"> Puntuacion: `+ estrellas(comentario.score) + `</h4>
                         <p> Comentario: ` + comentario.description + `</p>
                         <p> Usuario: ` + comentario.user + `</p>
-                        <p> Fecha: ` + comentario.dateTime + `</p>
+                        <p> Fecha: ` + formatFecha(comentario.dateTime) + `</p>
                     </div>
                 </div>
             </div>
@@ -55,8 +63,9 @@ function agregarComentario (){
     let puntuacionUsuario = JSON.parse(localStorage.getItem("puntuacionUsuario"));
     let comentarioUsuario = JSON.parse(localStorage.getItem("comentarioUsuario"));
     var hoy = new Date();
-    var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
-    var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+    var fecha = formatFecha(hoy);
+    //var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
+    //var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
     let htmlContentToAppendComentario = "";
 
     htmlContentToAppendComentario += `
@@ -66,9 +75,9 @@ function agregarComentario (){
                 <div class="d-flex w-100 justify-content-between">
                 <div class="mb-1">
                     <h4 class="mb-1"> Puntuacion: `+ estrellas(puntuacionUsuario) + `</h4>
-                    <p> Comentario: "` + comentarioUsuario + `"</p>
-                    <p> Usuario: "` + ulog + `"</p>
-                    <p> Fecha: ` + fecha + " " + hora + `</p>
+                    <p> Comentario: ` + comentarioUsuario + `</p>
+                    <p> Usuario: ` + ulog + `</p>
+                    <p> Fecha: ` + fecha + `</p>
                 </div>
             </div>
         </div>
