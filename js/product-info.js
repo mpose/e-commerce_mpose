@@ -148,7 +148,11 @@ function mostrarRelatedProducts(arrayListado, arrayRelacionados) {
         <img class="bd-placeholder-img card-img-top" src="` + arrayListado[indice].images[0] + `" alt="` + arrayListado[indice].description + `">
         <h3 class="m-3">` + arrayListado[indice].name + `</h3>
         <div class="card-body">
-            <p class="card-text">` + arrayListado[indice].description + `</p>
+            <p class="card-text">` + 
+            (arrayListado[indice].description.length > 100 
+                ? arrayListado[indice].description.substring(0, 100) + '...' 
+                : arrayListado[indice].description) + 
+            `</p>
             <p class="mb-1">` + arrayListado[indice].currency + arrayListado[indice].cost + `</p>
             <p class="card-text"><small class="text-muted">` + arrayListado[indice].soldCount + ` Ventas</small></p>
             <button style="float: right;" class="btn btn-info btn-sm" onclick=" verProducto('` + arrayListado[indice].name + `')">Más Información</button>
