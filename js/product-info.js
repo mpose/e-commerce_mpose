@@ -145,7 +145,7 @@ function mostrarRelatedProducts(arrayListado, arrayRelacionados) {
         htmlContentToAppend += `
         <div class="col-md-4 col-sm-6 col-lg-3">
         <div class="card mb-4 shadow-sm custom-card">
-        <img class="bd-placeholder-img card-img-top" src="` + arrayListado[indice].imgSrc + `" alt="` + arrayListado[indice].description + `">
+        <img class="bd-placeholder-img card-img-top" src="` + arrayListado[indice].images[0] + `" alt="` + arrayListado[indice].description + `">
         <h3 class="m-3">` + arrayListado[indice].name + `</h3>
         <div class="card-body">
             <p class="card-text">` + arrayListado[indice].description + `</p>

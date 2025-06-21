@@ -61,7 +61,7 @@ function mostrarListadoProductos(){
                     htmlContentToAppend += `
                     <div class="col-md-4 col-sm-6 col-lg-3">
                         <div class="card mb-4 shadow-sm custom-card">
-                        <img class="bd-placeholder-img card-img-top" src="` + product.imgSrc + `">
+                        <img class="bd-placeholder-img card-img-top" src="` + product.images[0] + `" alt="` + product.name + `">
                         <h3 class="m-3">`+ (product.name.length > 15 ? product.name.substring(0, 15) + '...' : product.name.padEnd(20, ' ')) + `</h3>
                         <div class="card-body">
                             <p class="card-text">` + (product.description.length > 50 ? product.description.substring(0, 50) + '...' : product.description) + `</p>
